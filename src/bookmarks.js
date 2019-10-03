@@ -5,12 +5,13 @@ import api from './api';
 
 const generateItemElement = function (mark) {
   let expand = '';
-  let markEither = `<span class="bookmark-item">${mark.name}</span>`;
+  let markEither = `<span class="bookmark-item">${mark.title}</span>`;
   if(store1.expand){
-    markEither = `<button class="bookmark-item-delete js-item-delete">
+    markEither = ``;
+    expand = `
+    <button class="bookmark-item-delete js-item-delete">
           <span class="button-label">delete</span>
-        </button>`;
-    markExpanded = `
+    </button>
       <div class="bookmark-visit-controls">
         <button class="visit js-item-toggle">
           <span class="button-label">Visit Site</span>
@@ -21,12 +22,12 @@ const generateItemElement = function (mark) {
         </section>
       </div>`;
   }
-
-  let result = `<li class="bookmark-element" bookmark-id="${bookmark.id}">
-                  <span class="mark">${mark.title} ${markEither}</span>
-                    ${markExpanded}
-               </li>`;  
-
+  let result = `<form class="bookmark-expand">
+                  <li class="bookmark-element" bookmark-id="${mark.id}">
+                    <span class="mark">${mark.title} ${markEither}</span>
+                    <div>${expand}</div>
+                  </li>
+                </form>`;  
   return result;
 };
 
@@ -37,7 +38,7 @@ const generateBookmarkString = function (bookmarks) {
 
 const filter = function () { 
   $('.filter').on("change", event => {
-    const result = ${event.target}.children(':selected').val 
+    const result = $(event.target).children(':selected').val(); 
     store1.sort(result);
     render();
   });
@@ -52,15 +53,15 @@ const toggleAddingClick = function (){
 
 // MAKE CHANGES HERE!!!!
 const newBookmarkSubmit = function () {
-  $('#show-bookmarks').submit(function (event){
+  $('#show-bookmarks').on('submit', '.bookmark-form', function (event){
     event.preventDefault();
-    const name  = $('.bookmark-name').val();
+    const title = $('.bookmark-title').val();
     const url   = $('.bookmark-url').val();
     const desc  = $('.bookmark-description').val();
-    const rating = $('.bookmark-rating').val(); 
+    const rating = parseInt($('input[name]:checked').val()); 
     const newMark = {title, url, desc, rating};
 
-    $('.bookmark-name').val('');
+    $('.bookmark-title').val('');
     $('.bookmark-url').val('');
     $('.bookmark-description').val('');
 
@@ -72,16 +73,18 @@ const newBookmarkSubmit = function () {
       }) 
       .catch((e) => {
         store1.setError(e.message);
+        // renderError();                       FIX THIS! 
       })
 
   })
 }
 
 const bookmarkClicked = function (){
-  $(`list-bookmark`).on('click', '.mark', event => {
+  $(`list-bookmark`).on('click', '.bookmark-expand', event => {
+    console.log('here');
     const id = getItemId(event.currentTarget);
     const result = store.findById(id);
-    store1.findAndUpdate(id, {expanded: !item.expanded});
+    store1.findAndUpdate(id, {expanded: !result.expanded});
     render();
   });
 };
@@ -104,7 +107,7 @@ const DeleteBookmarkClicked = function () {
 const bookmarkCanceled = function() {
   $('.bookmark-cancel').on('click', () => {
     store1.toggleAdd();
-    render;
+    render();
   });
 };
 
@@ -122,45 +125,52 @@ const render = function () {
 
   if(store1.store.adding){
     form = 
-    `<label for="bookmark-name">Name: </label>
-     <input type="text" class="bookmark-name" name="bookmark-name"/> 
-     <label for ="bookmark-url">URL: </label> 
-     <input type="text" class="bookmark-url" name="bookmark-url"/>
-     <label for="bookmark-description">Description: </label> 
-     <textarea type="text" class="bookmark-description" name="bookmark-description">
-     </textarea> 
-     <section id="bookmark-rating"> 
+    `<form class="bookmark-form">
       <fieldset class='set'>
-        <input id="rate5" class="rate" name="rate" type="radio">
-        <label for="rate5" class="star fa fa-star-o fa-lg"></label>
-        <input id="rate4" class="rate" name="rate" type="radio">
-        <label for="rate4" class="star fa fa-star-o fa-lg"></label>
-        <input id="rate3" class="rate" name="rate" type="radio">
-        <label for="rate3" class="star fa fa-star-o fa-lg"></label>
-        <input id="rate2" class="rate" name="rate" type="radio">
-        <label for="rate2" class="star fa fa-star-o fa-lg"></label>
-        <input id="rate1" class="rate" name="rate" type="radio">
-        <label for="rate1" class="star fa fa-star-o fa-lg"></label>
+      <label for="bookmark-title">Title: </label>
+      <input type="text" class="bookmark-title" name="bookmark-title"/> 
+      <label for ="bookmark-url">URL: </label> 
+      <input type="url" class="bookmark-url" name="bookmark-url"/>
+      <label for="bookmark-description">Description: </label> 
+      <textarea type="text" class="bookmark-description" name="bookmark-description">
+      </textarea> 
+      <section id="bookmark-rating"> 
+          <input id="rate5" class="rate" name="rate" type="radio" value="1">
+          <label for="rate5" class="star fa fa-star-o fa-lg"></label>
+          <input id="rate4" class="rate" name="rate" type="radio" value="2">
+          <label for="rate4" class="star fa fa-star-o fa-lg"></label>
+          <input id="rate3" class="rate" name="rate" type="radio" value="3">
+          <label for="rate3" class="star fa fa-star-o fa-lg"></label>
+          <input id="rate2" class="rate" name="rate" type="radio" value="4">
+          <label for="rate2" class="star fa fa-star-o fa-lg"></label>
+          <input id="rate1" class="rate" name="rate" type="radio" value="5">
+          <label for="rate1" class="star fa fa-star-o fa-lg"></label>
+      </section>
+      <button class="bookmark-cancel" type ="button">Cancel</button> 
+      <button class="bookmark-create" type="submit">Create</button>
       </fieldset>
-     </section>
-     <button class="bookmark-cancel" type ="button">Cancel</button> 
-     <button type="submit">Create</button>
-     `
+    </form>`
   }
 
-  ${'#show-bookmarks'}.html(form);
+  $('#show-bookmarks').html(form);
   if(store1.store.adding){
     bookmarkCanceled();
   }
-
   const markList = generateBookmarkString(marks);
-
   $(`#list-bookmark`).html(markList);
+   if(store1.store.bookmarks.find((item) => item.expanded)) {     //CHANGE THIS
+        handleBookmarkUrl();        // displays link when expanded 
+    }
 };
 
 
 const bindEventListeners = function (){
   filter();
+  newBookmarkSubmit();
+  bookmarkClicked();
+  DeleteBookmarkClicked();
+  toggleAddingClick();
+
 };
 
 

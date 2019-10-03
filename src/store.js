@@ -10,7 +10,7 @@ const findById = function(id){
 };
 
 const addMark = function (mark) {
-  object.assign(mark, {expanded: false})
+  Object.assign(mark, {expanded: false})
   this.store.bookmarks.push(mark);
 };
 
@@ -24,7 +24,9 @@ const toggleAdd = function(){
 
 const findAndUpdate = function(id, newMark){
   let updatedStore = this.findById(id);
-  Object.assign(updatedStore, newMark);
+  console.log(newMark);
+  console.log('current status:', store.adding)
+  Object.assign(store.bookmarks.title[updatedStore], newMark);    // Edited this 
 };
 
 const setError = function (error){
@@ -48,7 +50,7 @@ const sort = function (items){
       break;
     case 'zToA':
       const result = store.bookmarks.toLowerCase().sort();
-      return const.reverse();
+      return result.reverse();
       break;
   }
 }

@@ -6,7 +6,7 @@ module.exports = {
     path: __dirname + '/dist',
     filename: 'index_bundle.js'
   },
-  mode: 'development',
+  // mode: 'development',
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
@@ -22,9 +22,9 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|svg|jpg|gif)$/,
+        test: /\.(png|svg|jpg|gif|.css)$/,
         use: [
-          'file-loader'
+          'file-loader','css-loader'
         ]
       }
     ]

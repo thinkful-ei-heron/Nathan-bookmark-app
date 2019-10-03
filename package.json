@@ -2,12 +2,33 @@
   "name": "Nathan-bookmarks-app",
   "version": "1.0.0",
   "description": "Bookmark project developed by Nathan Leung",
-  "main": "index.js",
+  "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node your-script.js"
+    "start": "webpack-dev-server",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thinkful-ei-heron/Nathan-bookmark-app.git"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+   "bugs": {
+    "url": "https://github.com/thinkful-ei-heron/Nathan-bookmark-app/issues"
+  },
+  "homepage": "https://github.com/thinkful-ei-heron/Nathan-bookmark-app#readme",
+  "dependencies": {
+    "jquery": "^3.4.1"
+  },
+  "devDependencies": {
+    "css-loader": "^3.2.0",
+    "file-loader": "^4.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.41.0",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.2"
+  }
 }
