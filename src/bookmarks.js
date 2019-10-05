@@ -52,7 +52,7 @@ const toggleAddingClick = function (){
 };
 
 const newBookmarkSubmit = function () {
-  $('#show-bookmarks').on('submit', '.bookmark-create', event =>{
+  $('#show-bookmarks').submit(function (event) {
     event.preventDefault();
     console.log('here');
     const title = $('.bookmark-title').val();
@@ -76,7 +76,7 @@ const newBookmarkSubmit = function () {
         //renderError();                       FIX THIS! 
       })
 
-  })
+  });
 }
 
 const bookmarkClicked = function (){
