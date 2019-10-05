@@ -1,3 +1,10 @@
 .start-container{
   border: 1px sold black;
 }
+
+li {
+  display:inline;
+  padding:1em;
+  margin:1em;
+  /* background-color: blue; */
+}

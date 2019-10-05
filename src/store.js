@@ -6,7 +6,8 @@ const store = {
 };
 
 const findById = function(id){
-  return this.store.find(mark => mark.id === id);
+  const result = this.store.bookmarks.find(mark => mark.id === id);
+  return this.store.bookmarks.find(mark => mark.id === id);
 };
 
 const addMark = function (mark) {
@@ -24,10 +25,8 @@ const toggleAdd = function(){
 
 const findAndUpdate = function(id, newMark){
   let updatedStore = this.findById(id);
-  console.log(newMark);
-  console.log('current status:', store.adding)
-  Object.assign(store.bookmarks.title[updatedStore], newMark);    // Edited this 
-};
+  Object.assign(updatedStore, newMark);   
+  };
 
 const setError = function (error){
   this.store.error = error;
@@ -44,13 +43,20 @@ const sort = function (items){
       store.bookmarks.sort(function(a, b){
         return a.rating - b.rating;
       });
-      breakl
+      break;
     case 'aToZ':
-      return store.bookmarks.toLowerCase().sort();
+      store.bookmarks.sort(function (a, b){
+        const title1 = a.title.toLowerCase();
+        const title2 = b.title.toLowerCase();
+        return ((title1<title2) ? -1: ((title1>title2)? 1:0));
+      });
       break;
     case 'zToA':
-      const result = store.bookmarks.toLowerCase().sort();
-      return result.reverse();
+      store.bookmarks.sort(function(a, b){
+        const title1 = b.title.toLowerCase();
+        const title2 = a.title.toLowerCase();
+        return ((title1<title2) ? -1: ((title1>title2)? 1:0));
+      });
       break;
   }
 }

@@ -5,8 +5,8 @@ import api from './api';
 
 const generateItemElement = function (mark) {
   let expand = '';
-  let markEither = `<span class="bookmark-item">${mark.title}</span>`;
-  if(store1.expand){
+  let markEither = `<div class="mark">${mark.rating}</div>`;
+  if(mark.expanded){
     markEither = ``;
     expand = `
     <button class="bookmark-item-delete js-item-delete">
@@ -22,12 +22,11 @@ const generateItemElement = function (mark) {
         </section>
       </div>`;
   }
-  let result = `<form class="bookmark-expand">
-                  <li class="bookmark-element" bookmark-id="${mark.id}">
-                    <span class="mark">${mark.title} ${markEither}</span>
-                    <div>${expand}</div>
-                  </li>
-                </form>`;  
+  let result = `
+                  <li class="js-item-element" id="${mark.id}">
+                    <div class="mark-opener">${mark.title} ${markEither}</div>
+                    ${expand}
+                  </li>`;  
   return result;
 };
 
@@ -37,8 +36,9 @@ const generateBookmarkString = function (bookmarks) {
 };
 
 const filter = function () { 
-  $('.filter').on("change", event => {
+  $('#filter').on('change', event => {
     const result = $(event.target).children(':selected').val(); 
+    console.log(result);
     store1.sort(result);
     render();
   });
@@ -51,10 +51,10 @@ const toggleAddingClick = function (){
   });
 };
 
-// MAKE CHANGES HERE!!!!
 const newBookmarkSubmit = function () {
-  $('#show-bookmarks').on('submit', '.bookmark-form', function (event){
+  $('#show-bookmarks').on('submit', '.bookmark-create', event =>{
     event.preventDefault();
+    console.log('here');
     const title = $('.bookmark-title').val();
     const url   = $('.bookmark-url').val();
     const desc  = $('.bookmark-description').val();
@@ -67,30 +67,29 @@ const newBookmarkSubmit = function () {
 
     api.createBookmark(newMark)
       .then((item) => {
-        store1.addItem(item);
+        store1.addMark(item);
         store1.toggleAdd();
         render();
       }) 
       .catch((e) => {
         store1.setError(e.message);
-        // renderError();                       FIX THIS! 
+        //renderError();                       FIX THIS! 
       })
 
   })
 }
 
 const bookmarkClicked = function (){
-  $(`list-bookmark`).on('click', '.bookmark-expand', event => {
-    console.log('here');
+  $(`#list-bookmark`).on('click','.mark-opener', event =>{
     const id = getItemId(event.currentTarget);
-    const result = store.findById(id);
+    const result = store1.findById(id);
     store1.findAndUpdate(id, {expanded: !result.expanded});
     render();
   });
 };
 
 const DeleteBookmarkClicked = function () { 
-  $(`list-bookmark`).on('click', '.bookmark-item-delete', event =>{
+  $(`#list-bookmark`).on('click', '.bookmark-item-delete', event =>{
     const id = getItemId(event.currentTarget);
     api.deleteBookmark(id)
       .then(() => {
@@ -112,9 +111,7 @@ const bookmarkCanceled = function() {
 };
 
 const getItemId = function(item) {
-  return $(item)
-    closest('.js-item-element')
-    .data('item-id');
+  return $(item).closest('.js-item-element').attr('id');
 };
 
 
@@ -158,11 +155,20 @@ const render = function () {
   }
   const markList = generateBookmarkString(marks);
   $(`#list-bookmark`).html(markList);
-   if(store1.store.bookmarks.find((item) => item.expanded)) {     //CHANGE THIS
-        handleBookmarkUrl();        // displays link when expanded 
+  
+  if(store1.store.bookmarks.find((item) => item.expanded)) {     //CHANGE THIS
+        bookmarkUrl();        // displays link when expanded 
     }
 };
 
+const bookmarkUrl = function(){
+  $('.js-item-toggle').on('click', event =>{
+    const id = getItemId(event.currentTarget);
+    const mark = store1.findById(id);
+    window.open(mark.url);
+    
+  })
+};
 
 const bindEventListeners = function (){
   filter();
