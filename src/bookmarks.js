@@ -125,14 +125,14 @@ const render = function () {
     `<form class="bookmark-form">
       <fieldset class='set'>
       <label for="bookmark-title">Title: </label>
-      <input type="text" class="bookmark-title" name="bookmark-title"/> 
+      <input type="text" class="bookmark-title" name="bookmark-title" required/> 
       <label for ="bookmark-url">URL: </label> 
-      <input type="url" class="bookmark-url" name="bookmark-url"/>
+      <input type="url" class="bookmark-url" name="bookmark-url" required/>
       <label for="bookmark-description">Description: </label> 
       <textarea type="text" class="bookmark-description" name="bookmark-description">
       </textarea> 
       <section id="bookmark-rating"> 
-          <input id="rate5" class="rate" name="rate" type="radio" value="1">
+          <input id="rate5" class="rate" name="rate" type="radio" value="1" required>
           <label for="rate5" class="star fa fa-star-o fa-lg"></label>
           <input id="rate4" class="rate" name="rate" type="radio" value="2">
           <label for="rate4" class="star fa fa-star-o fa-lg"></label>
