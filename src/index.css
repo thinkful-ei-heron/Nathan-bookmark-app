@@ -1,10 +1,226 @@
-.start-container{
-  border: 1px sold black;
+
+.container {
+  margin: 0 auto;
+  text-align: center;
+  /* border-radius: 10px; */
+  color: white;
+  padding-top: 5px;
 }
 
-li {
-  display:inline;
-  padding:1em;
-  margin:1em;
-  /* background-color: blue; */
+.start-container{
+  padding-top: 20px;
 }
+
+body { 
+  background-image: url("https://barriodogg.com/wp-content/uploads/2018/11/WEBSITE-WOOD-BACKGROUND.jpg");
+  background-size: cover;
+  background-position: center center;
+}
+
+#header {
+  font-size: 25px;
+} 
+
+h1 { 
+  margin: 20px auto 10px;
+}
+
+.new-bookmark { 
+  background-color: rgb(262,259,52);
+  border: none; 
+  color: black; 
+  padding: 3px 17px; 
+  text-align: center; 
+  text-decoration: none; 
+  display: inline-block; 
+  font-size: 16px; 
+  border-radius: 12px;
+}
+
+#filter { 
+  display: inline-block;
+  font-size: 16px;
+  font-family: sans-serif;
+  color: black;
+  line-height: 1.3;
+  padding: 1px 17px;
+  width: auto;
+  max-width: 100%; 
+  box-sizing: border-box;
+  margin: 0;
+  margin-left: 5px;
+  margin-top: 10px;
+  border-radius: 12px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: cadetblue;
+}
+
+
+.set { 
+  margin-top: 20px;
+  border-radius: 12px;  
+  background-color: cadetblue;
+  color: black;
+  text-align: left;
+ }
+
+ #show-bookmark {
+   display: inline-block;
+   padding: 0px;
+ }
+
+ form {
+  padding: .5rem;
+  width: auto;
+  margin: auto;
+}
+
+input, textarea{ 
+  border-radius: 5px;
+  padding-bottom: 20px;
+  width: auto;
+}
+
+.cancel-create{ 
+  padding-top: 5px;
+  text-align: center;
+}
+
+.bookmark-cancel, .bookmark-create{ 
+  border: 1px solid black;
+  background: rgb(262,259,52);
+  border-radius: 5px;
+}
+
+
+#bookmark-rating {
+  font-size: 0;
+  text-align: center;
+}
+
+    
+.set-this {
+  display: inline-block;
+  font-size: 1rem;
+  border: 1px solid #FC0;
+  border-radius: 12px;  
+  padding: 10px 2px;
+  /* width: auto; */
+  margin-top: 5px;
+  margin-left: auto; 
+  margin-right: auto;
+}
+    
+.set-this:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+    
+.star {
+  float: right;
+  padding-left: 2px;
+  cursor: pointer;
+  color: #FFB300;
+}
+    
+.star:last-child {
+  padding-left: 0;
+}
+    
+.rate {
+  display: none;
+}
+
+.star:hover:before,
+.star:hover~.star:before,
+.rate:checked~.star:before {
+  content: "\f005";
+}
+
+#list-bookmark {
+  background: cadetblue;
+  color: black;
+  border-radius: 12px;
+  padding-left: 0px;
+  margin: 0px 40px;
+  width: auto;
+}
+
+li { 
+  list-style-type: none; 
+}
+
+.mark-opener { 
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 15px;
+  width: 100%;
+}
+
+.js-item-element{ 
+  width: auto;
+}
+
+.bookmark-visit-controls { 
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-left: auto; 
+  padding-right: auto;
+}
+
+.heading-expand {  
+  display: flex;
+  justify-content: space-between;
+  /* align-content: column; */
+}
+
+.new-mark { 
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.bookmark-rating{ 
+  padding-right: 15px;
+  /* background: blac; */
+  color: white;
+}
+
+.button-label{ 
+  padding: 0px 10px;
+  border: .5px solid black;
+  border-radius: 12px;
+  text-align: center;
+  background: rgb(262,259,52);
+  color: black;
+}
+
+.bookmark-item-delete { 
+  background: cadetblue;
+  border: none;
+}
+
+.visit { 
+  background: cadetblue;
+  border: none;
+}
+
+.description { 
+  text-align: left;
+  padding: 10px 15px;
+  background: white;
+  border-radius: 12px;
+  margin-top: 5px;
+  font-size: 14px;
+  color: black;
+}
+
+.fa-star { 
+  color: rgb(262,259,52);
+  margin-left: 5px;
+}
+

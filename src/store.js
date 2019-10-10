@@ -11,6 +11,7 @@ const findById = function(id){
 };
 
 const addMark = function (mark) {
+
   Object.assign(mark, {expanded: false})
   this.store.bookmarks.push(mark);
 };
