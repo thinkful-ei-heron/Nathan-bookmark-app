@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 
 const BASE_URL = 'https://thinkful-list-api.herokuapp.com/nate/bookmarks';
 
@@ -12,18 +12,18 @@ const apiFetch = function (...args) {
         if (!res.headers.get('content-type').includes('json')) {
           error.message = res.statusText;
           return Promise.reject(error);
+        }
       }
-    }
-    return res.json();
-  })
-  .then(data => {
+      return res.json();
+    })
+    .then(data => {
 
-    if(error){
-      error.message = data.message;
-      return Promise.reject(error);
-    }
-    return data;
-  });
+      if(error){
+        error.message = data.message;
+        return Promise.reject(error);
+      }
+      return data;
+    });
 };
 
 
@@ -60,5 +60,6 @@ export default{
   getBookmarks, 
   createBookmark,
   updateBookmark, 
-  deleteBookmark
+  deleteBookmark,
+  BASE_URL
 };

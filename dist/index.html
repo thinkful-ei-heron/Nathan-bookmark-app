@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/96f9de75ad.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <section class="container">
+    <section id='header'>
+        <h1>My Bookmarks</h1>
+    </section>
+    <section id="show-app">
+      <section id="app-top">
+      <div class="start-conatainer">
+        <button class="new-bookmark">+New</button>
+        <select id="filter" name='Filter'>
+      </div>
+          <option value="" selected disabled hidden>Filter bookmarks</option>
+          <option class="filter-toggle" value="highRate" >Highest Rating</option>
+          <option class="filter-toggle" value="lowRate">Lowest Rating</option>
+          <option class="filter-toggle" value="aToZ">A to Z</option>
+          <option class="filter-toggle" value="zToA">Z to A</option>
+        </select>
+      </section>
+      <form id="show-bookmarks">
+      </form>
+      <ul id="list-bookmark">
+      </ul>
+    </section>
+  </section>
+<script type="text/javascript" src="index_bundle.js"></script></body>
+</html>

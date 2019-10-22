@@ -4,6 +4,7 @@ import store from './store';
 import './index.css';
 import bookmarks from './bookmarks';
 
+
 const main = function() {
   api.getBookmarks()
     .then(marks =>{
