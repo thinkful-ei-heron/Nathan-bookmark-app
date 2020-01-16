@@ -144,15 +144,15 @@ const render = function () {
         </div>
       <section id="bookmark-rating"> 
         <fieldset class='set-this'>
-          <input id="rate5" class="rate" name="rate" type="radio" value="1" required>
+          <input id="rate5" class="rate" name="rate" type="radio" value="5" required>
           <label for="rate5" class="star fa fa-star-o fa-lg"></label>
-          <input id="rate4" class="rate" name="rate" type="radio" value="2">
+          <input id="rate4" class="rate" name="rate" type="radio" value="4">
           <label for="rate4" class="star fa fa-star-o fa-lg"></label>
           <input id="rate3" class="rate" name="rate" type="radio" value="3">
           <label for="rate3" class="star fa fa-star-o fa-lg"></label>
-          <input id="rate2" class="rate" name="rate" type="radio" value="4">
+          <input id="rate2" class="rate" name="rate" type="radio" value="2">
           <label for="rate2" class="star fa fa-star-o fa-lg"></label>
-          <input id="rate1" class="rate" name="rate" type="radio" value="5">
+          <input id="rate1" class="rate" name="rate" type="radio" value="1">
           <label for="rate1" class="star fa fa-star-o fa-lg"></label>
         </fieldset> 
       </section>
