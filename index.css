@@ -95,9 +95,18 @@ input, textarea{
 }
 
 
+/* #bookmark-rating {
+  font-size: 0;
+  text-align: center;
+} */
+
 #bookmark-rating {
   font-size: 0;
   text-align: center;
+}
+
+#bookmark-rating input{ 
+  display: none;
 }
 
     
@@ -123,21 +132,31 @@ input, textarea{
   float: right;
   padding-left: 2px;
   cursor: pointer;
-  color: #FFB300;
+  /* color: #FFB300; */
 }
-    
+
 .star:last-child {
   padding-left: 0;
 }
     
-.rate {
+#bookmark-rating label:before{
+  content: "\f005";
+  font-family: fontAwesome;  
   display: none;
 }
 
-.star:hover:before,
-.star:hover~.star:before,
-.rate:checked~.star:before {
+#bookmark-rating label:after{
   content: "\f005";
+  font-family: fontAwesome;
+  color: #FFB300;
+  opacity: 0.5; 
+  transition: .5s;
+}
+
+#bookmark-rating label:hover:after,
+#bookmark-rating label:hover ~ label:after,
+#bookmark-rating input:checked ~ label:after{
+  opacity: 1; 
 }
 
 #list-bookmark {
